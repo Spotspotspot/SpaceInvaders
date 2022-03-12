@@ -1,14 +1,4 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-import time
 from graphics import *
-import ctypes
-from ctypes import c_long, c_wchar_p, c_ulong, c_void_p
-
-#==== GLOBAL VARIABLES ======================
-
 
 displayArea = GraphWin('Object Invaders', 300, 300)     # create graphical window object
 
