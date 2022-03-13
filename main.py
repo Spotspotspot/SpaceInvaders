@@ -1,4 +1,7 @@
 # Simple demo of Object Oriented Programming
+# added use of lists of objects
+
+# Note - this is written for simplicity, not for the neatest, best or cleverest use of Python
 
 # don't need to look at graphics.py now
 from graphics import *
@@ -55,34 +58,31 @@ displayArea = GraphWin('Object Invaders', 300, 300)     # create graphical windo
 
 displayArea.setBackground("black")
 
+# choose how many aliens you want
+numberOfAliens = 10
+
 # create some aliens.
-# fred, tom and harry are "Objects"
-fred = Alien()          # create fred
-fred.x = 50             # change fred's properties
+aliens = []     # start with a blank list of aliens
 
-tom = Alien()           # create tom
-tom.x = 200             # change tom's properties
-tom.colour = "red"
+for i in range(numberOfAliens):     # equivalent to "for (i=0; i<numberOfAliens; i++)"
+    anotherAlien = Alien()          # make a new alien object
+    anotherAlien.x = i * 20         # set its properties
+    aliens.append(anotherAlien)     # add it to the list of aliens
+    # after this, the alien just created is not forgotten because it's referenced (referred to) in the list
+    # however the line "anotherAlien = Alien()" is executed again, it makes "anotherAlien" refer to a new alien,
+    # so it doesn't refer to the previous alien anymore
 
-harry = Alien()
-harry.x = 100
-harry.colour = "blue"
-
-# do something with them
 while (1):
-    tom.draw()
-    fred.draw()
-    harry.draw()
+    for badGuys in aliens:        # draw ALL aliens (Note: you can use any name instead of 'badGuys' if you want)
+        badGuys.draw()
 
-    time.sleep(0.05)
+    time.sleep(0.1)
 
-    tom.erase()
-    fred.erase()
-    harry.erase()
+    for badGuys in aliens:        # erase ALL aliens
+        badGuys.erase()
 
-    tom.move()
-    fred.move()
-    harry.move()
+    for badGuys in aliens:        # move ALL aliens
+        badGuys.move()
 
     # and do it all again forever!
 
