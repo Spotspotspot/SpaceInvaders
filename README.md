@@ -4,5 +4,6 @@
 <li>1- Classes, Objects, Properties and Methods</li>
 <li>2- Lists of Objects</li>
 <li>3- Inheritance</li>
+<li>4- Inheritance - Overriding methods</li>
 </ul>
 

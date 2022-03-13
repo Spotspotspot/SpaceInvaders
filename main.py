@@ -15,16 +15,29 @@ def drawCircle(x, y, radius, colour):
 
 
 # definition of Location "Class"
-class location:
+class Location:
 
     # these are "Properties"
     x = 10
     y = 10
     # no methods here
 
+#definition of gameItem "Class"
+class GameItem(Location): # inherits locations properties
+    def draw(self):     # any child class (eg Alien below) should override this by having its own "draw()" method
+        pass            # do nothing
+
+    def erase(self):    # any child class (eg Alien below) should override this by having its own "erase()" method
+        pass            # do nothing
+
+    def move(self):     # any child class (eg Alien below) should override this by having its own  "move()" method
+        pass            # do nothing
+
+
 # definition of Alien "Class"
-# Alien Class inherits all of the location Classes properties and methods etc
-class Alien(location):
+# Alien Class inherits all of the gameItem Classes properties and methods etc
+# and overrides "draw()" "erase()" and "move()" methods
+class Alien(GameItem):
 
     # these are "Properties"
     colour = "green"   # these are the default properties
@@ -58,6 +71,27 @@ class Alien(location):
 
 # end of Alien class definition
 
+# definition of Player "Class"
+# Player Class inherits all of the gameItem Classes properties and methods etc
+# and overrides "draw()" "erase()" and "move()" methods
+class Player(GameItem):
+
+    x = 150
+    y = 250
+
+    # these are "Methods"
+    def draw(self):
+        drawCircle(self.x, self.y, 40, "pink")
+
+    def erase(self):    # same as draw(self): above except draws in black over the top of the last circle to erase it
+        drawCircle(self.x, self.y, 40, "black")
+
+    def move(self):
+        pass            # the player seems to have gone to sleep
+
+# end of Player class definition
+
+
 
 # Start of the Main program
 
@@ -68,28 +102,36 @@ displayArea.setBackground("black")
 # choose how many aliens you want
 numberOfAliens = 10
 
-# create some aliens.
-aliens = []     # start with a blank list of aliens
+items = []      # start with a blank list of game items
+                # everthing added to this list must be derived from GameItem class,
+                # so it can be more than just aliens
 
+
+# make a player
+myPlayer = Player()
+
+items.append(myPlayer)  # add my player to the list of game items
+
+# create some aliens.
 for i in range(numberOfAliens):     # equivalent to "for (i=0; i<numberOfAliens; i++)"
     anotherAlien = Alien()          # make a new alien object
     anotherAlien.x = i * 20         # set its properties
-    aliens.append(anotherAlien)     # add it to the list of aliens
+    items.append(anotherAlien)      # add it to the list of game items
     # after this, the alien just created is not forgotten because it's referenced (referred to) in the list
     # however the line "anotherAlien = Alien()" is executed again, it makes "anotherAlien" refer to a new alien,
     # so it doesn't refer to the previous alien anymore
 
 while (1):
-    for badGuys in aliens:        # draw ALL aliens (Note: you can use any name instead of 'badGuys' if you want)
-        badGuys.draw()
+    for stuff in items:        # draw ALL items (Note: you can use any name instead of 'stuff' if you want)
+        stuff.draw()
 
     time.sleep(0.1)
 
-    for badGuys in aliens:        # erase ALL aliens
-        badGuys.erase()
+    for stuff in items:        # erase ALL items
+        stuff.erase()
 
-    for badGuys in aliens:        # move ALL aliens
-        badGuys.move()
+    for stuff in items:        # move ALL items
+        stuff.move()
 
     # and do it all again forever!
 
