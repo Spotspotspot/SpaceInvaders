@@ -1,4 +1,15 @@
+# Simple demo of Object Oriented Programming
+
+# don't need to look at graphics.py now
 from graphics import *
+
+# draws a circle (don't need to understand this now)
+def drawCircle(x, y, radius, colour):
+    cir = Circle(Point(x, y), radius)   # create circle object
+    cir.setOutline(colour)              # set its colour property to what we want
+    cir.setWidth(4)                     # set its line width to what we want
+    cir.draw(displayArea)               # tell it to draw itself on the graphical window object
+
 
 # definition of Alien "Class"
 class Alien:
@@ -12,16 +23,10 @@ class Alien:
 
     # these are "Methods"
     def draw(self):
-        cir = Circle(Point(self.x, self.y), 20)     # create circle object
-        cir.setOutline(self.colour)                 # set its colour property to what we want
-        cir.setWidth(4)                             # set its line width to what we want
-        cir.draw(displayArea)                       # tell it to draw itself on the graphical window object
+        drawCircle(self.x, self.y, 20, self.colour)
 
-    def erase(self):                                # same as draw(self): above except draws in black
-        cir = Circle(Point(self.x, self.y), 20)
-        cir.setOutline("black")
-        cir.setWidth(4)
-        cir.draw(displayArea)
+    def erase(self):    # same as draw(self): above except draws in black over the top of the last circle to erase it
+        drawCircle(self.x, self.y, 20, "black")
 
     def move(self):
         if self.direction > 0:                  # if moving right
