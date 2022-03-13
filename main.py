@@ -14,13 +14,20 @@ def drawCircle(x, y, radius, colour):
     cir.draw(displayArea)               # tell it to draw itself on the graphical window object
 
 
+# definition of Location "Class"
+class location:
+
+    # these are "Properties"
+    x = 10
+    y = 10
+    # no methods here
+
 # definition of Alien "Class"
-class Alien:
+# Alien Class inherits all of the location Classes properties and methods etc
+class Alien(location):
 
     # these are "Properties"
     colour = "green"   # these are the default properties
-    x = 10
-    y = 10
     direction = 1       # 1 = right, -1 = left
     speed = 15
 
